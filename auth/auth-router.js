@@ -27,7 +27,7 @@ router.post('/register', (req, res) => {
       .first()
       .then(user => {
         if (user && bcrypt.compareSync(password, user.password)) {
-          const token = generateToken(user); // <<<<<<<<<<<<<<<<<<<<<<<<
+          const token = generateToken(user);
           res.status(200).json({
             message: `Welcome ${user.username}!`,
             token,
@@ -43,9 +43,9 @@ router.post('/register', (req, res) => {
   
   function generateToken(user) {
     const payload = {
-      subject: user.id, // what the token is describing
+      subject: user.id,
       username: user.username,
-      roles: ['student'], // user.roles
+      roles: ['student'],
     };
     const options = {
       expiresIn: '1h',
